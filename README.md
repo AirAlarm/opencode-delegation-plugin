@@ -50,7 +50,21 @@ A multi-agent delegation system for [OpenCode](https://opencode.ai) that orchest
 
 ## Installation
 
-1. **Copy to your project:**
+### Option 1: GitHub Reference (Recommended)
+
+Add the plugin to your `opencode.json`:
+
+```json
+{
+  "plugin": ["github:AirAlarm/opencode-delegation-plugin"]
+}
+```
+
+OpenCode will automatically install and update the plugin from GitHub.
+
+### Option 2: Copy to Your Project
+
+1. **Copy the plugin files:**
    ```bash
    cp -r opencode-delegation-plugin/.opencode /your/project/
    cp opencode-delegation-plugin/opencode.json /your/project/
