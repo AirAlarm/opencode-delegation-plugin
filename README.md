@@ -15,23 +15,22 @@ A multi-agent delegation system for [OpenCode](https://opencode.ai) that orchest
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  Orchestrator (qwen3.7-plus)                     │
-│  Plans → Delegates → Reviews → Integrates        │
-└──────────┬──────────────────────────┬────────────┘
+│  Orchestrator (qwen3.7-plus)                    │
+│  Plans → Delegates → Reviews → Integrates       │
+└──────────┬──────────────────────────┬───────────┘
            │                          │
-    ┌──────▼──────┐           ┌──────▼──────┐
-    │  Plugin      │           │  Custom      │
-    │  (events,    │           │  Tools       │
-    │   routing)   │           │  (delegate,  │
-    └──────┬──────┘           │   collect)   │
-           │                   └──────┬──────┘
-    ┌──────▼──────────────────────────▼──────┐
-    │         Worker Agents (parallel)         │
+    ┌──────▼──────┐           ┌───────▼───────┐
+    │  Plugin     │           │  Custom Tools │
+    │  (events,   │           │  (delegate,   │
+    │   routing)  │           │   collect)    │
+    └──────┬──────┘           └──────┬────────┘
+    ┌──────▼─────────────────────────▼───────┐
+    │         Worker Agents (parallel)       │
     │  ┌─────────┐ ┌─────────┐ ┌───────────┐ │
     │  │fast     │ │main     │ │smart      │ │
     │  │(3 lanes)│ │(3 lanes)│ │(3 lanes)  │ │
     │  └─────────┘ └─────────┘ └───────────┘ │
-    └─────────────────────────────────────────┘
+    └────────────────────────────────────────┘
 ```
 
 ## Agent Configuration
