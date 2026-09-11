@@ -1,0 +1,40 @@
+{
+  "name": "@airalarm/opencode-delegation",
+  "version": "1.0.0",
+  "description": "Multi-agent delegation plugin for OpenCode with parallel task execution, automatic token optimization, and rate limit handling",
+  "main": ".opencode/plugins/delegation.ts",
+  "type": "module",
+  "keywords": [
+    "opencode",
+    "plugin",
+    "delegation",
+    "multi-agent",
+    "orchestration",
+    "parallel",
+    "task-management"
+  ],
+  "author": "AirAlarm",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AirAlarm/opencode-delegation-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AirAlarm/opencode-delegation-plugin/issues"
+  },
+  "homepage": "https://github.com/AirAlarm/opencode-delegation-plugin#readme",
+  "dependencies": {
+    "zod": "^3.23.0"
+  },
+  "peerDependencies": {
+    "@opencode-ai/plugin": "*"
+  },
+  "files": [
+    ".opencode/",
+    "README.md",
+    "SHUNT_INTEGRATION.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

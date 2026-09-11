@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@airalarm/opencode-delegation"],
   "agent": {
     "orchestrator": {
       "description": "Supervisor that decomposes work, delegates to worker agents, reviews results, and integrates output.",
