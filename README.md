@@ -56,11 +56,18 @@ Add the plugin to your `opencode.json`:
 
 ```json
 {
-  "plugin": ["github:AirAlarm/opencode-delegation-plugin"]
+  "plugin": ["github:AirAlarm/opencode-delegation-plugin#498d55802defd951f33e4a55039d63fed3af5411"]
 }
 ```
 
-OpenCode will automatically install and update the plugin from GitHub.
+**Important:** Pin to a specific commit hash (as shown above) for faster startup. Without a commit hash, OpenCode checks for updates on every load, which adds ~30-60 seconds to startup time.
+
+To get the latest commit hash:
+```bash
+git ls-remote https://github.com/AirAlarm/opencode-delegation-plugin HEAD
+```
+
+OpenCode will install the plugin from GitHub and cache it locally.
 
 ### Option 2: Copy to Your Project
 
