@@ -1,0 +1,164 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "orchestrator": {
+      "description": "Supervisor that decomposes work, delegates to worker agents, reviews results, and integrates output.",
+      "mode": "primary",
+      "model": "opencode-go/qwen3.7-plus",
+      "color": "#e0a030",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "task": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-fast": {
+      "description": "Fast worker for tiny tasks: summaries, extractions, single-file edits, classification.",
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "steps": 10,
+      "color": "#22c55e",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-fast-2": {
+      "description": "Second fast worker lane. GPT-5.6 Luna — use when worker-fast is busy or for a second opinion.",
+      "mode": "subagent",
+      "model": "opencode-go/gpt-5.6-luna",
+      "steps": 10,
+      "color": "#34d399",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-fast-3": {
+      "description": "Third fast worker lane. GLM-5.3 Flash.",
+      "mode": "subagent",
+      "model": "opencode-go/glm-5.3-flash",
+      "steps": 10,
+      "color": "#6ee7b7",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-main": {
+      "description": "Default worker. Bounded code edits, implementation, test writing, multi-file changes.",
+      "mode": "subagent",
+      "model": "opencode-go/minimax-m3",
+      "steps": 30,
+      "color": "#4a9eff",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-main-2": {
+      "description": "Second main worker lane. Claude Sonnet 5 — use when worker-main is busy or task needs Anthropic-style reasoning.",
+      "mode": "subagent",
+      "model": "claude-code/sonnet",
+      "steps": 30,
+      "color": "#60a5fa",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-main-3": {
+      "description": "Third main worker lane. DeepSeek V4 Pro.",
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-pro",
+      "steps": 30,
+      "color": "#93c5fd",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-smart": {
+      "description": "High-capability worker for hard tasks: complex refactors, architecture, debugging.",
+      "mode": "subagent",
+      "model": "opencode-go/glm-5.3",
+      "steps": 40,
+      "color": "#a855f7",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-smart-2": {
+      "description": "Top-tier worker for the hardest tasks. Claude Opus 5 — escalate here when worker-smart fails.",
+      "mode": "subagent",
+      "model": "claude-code/opus",
+      "steps": 40,
+      "color": "#c084fc",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "worker-smart-3": {
+      "description": "Third smart lane. GPT-6-Astra — use for parallel hard tasks or when other smart workers are busy.",
+      "mode": "subagent",
+      "model": "openai/gpt-6-astra",
+      "steps": 40,
+      "color": "#e879f9",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow",
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    },
+    "reviewer": {
+      "description": "Reviews worker output for correctness, regressions, and convention compliance. Read-only.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-sol",
+      "steps": 15,
+      "color": "#f59e0b",
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "*": "deny",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git show*": "allow"
+        },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow"
+      }
+    }
+  }
+}
