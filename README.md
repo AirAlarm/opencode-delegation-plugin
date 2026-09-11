@@ -56,7 +56,7 @@ Add the plugin to your `opencode.json`:
 
 ```json
 {
-  "plugin": ["github:AirAlarm/opencode-delegation-plugin#498d55802defd951f33e4a55039d63fed3af5411"]
+  "plugin": ["github:AirAlarm/opencode-delegation-plugin#50d80e9"]
 }
 ```
 
@@ -67,7 +67,7 @@ To get the latest commit hash:
 git ls-remote https://github.com/AirAlarm/opencode-delegation-plugin HEAD
 ```
 
-OpenCode will install the plugin from GitHub and cache it locally.
+OpenCode will clone the repository and load plugins directly from `.opencode/plugins/` without installing npm dependencies.
 
 ### Option 2: Copy to Your Project
 
