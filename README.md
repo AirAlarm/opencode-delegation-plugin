@@ -50,46 +50,69 @@ A multi-agent delegation system for [OpenCode](https://opencode.ai) that orchest
 
 ## Installation
 
-### Option 1: GitHub Reference (Recommended)
-
-Add the plugin to your `opencode.json`:
+### Step 1: Add the plugin to your `opencode.json`
 
 ```json
 {
-  "plugin": ["github:AirAlarm/opencode-delegation-plugin#50d80e9"]
+  "plugin": ["github:AirAlarm/opencode-delegation-plugin#2426c53"]
 }
 ```
 
-**Important:** Pin to a specific commit hash (as shown above) for faster startup. Without a commit hash, OpenCode checks for updates on every load, which adds ~30-60 seconds to startup time.
+**Important:** Pin to a specific commit hash for faster startup. Without a commit hash, OpenCode checks for updates on every load.
 
-To get the latest commit hash:
+### Step 2: Copy agent definitions to your project
+
+The plugin provides tools, but you need to copy the agent definitions into your project. Choose one method:
+
+**Option A: Copy the agents directory (recommended)**
+
 ```bash
-git ls-remote https://github.com/AirAlarm/opencode-delegation-plugin HEAD
+# Clone the plugin repo temporarily
+git clone https://github.com/AirAlarm/opencode-delegation-plugin /tmp/delegation-plugin
+
+# Copy the agents to your project
+cp -r /tmp/delegation-plugin/.opencode/agents /your/project/.opencode/
+
+# Clean up
+rm -rf /tmp/delegation-plugin
 ```
 
-OpenCode will clone the repository and load plugins directly from `.opencode/plugins/` without installing npm dependencies.
+**Option B: Copy agent definitions from opencode.json**
 
-### Option 2: Copy to Your Project
+Copy the `agent` section from the plugin's `opencode.json` into your project's `opencode.json`:
 
-1. **Copy the plugin files:**
-   ```bash
-   cp -r opencode-delegation-plugin/.opencode /your/project/
-   cp opencode-delegation-plugin/opencode.json /your/project/
-   ```
+```json
+{
+  "plugin": ["github:AirAlarm/opencode-delegation-plugin#2426c53"],
+  "agent": {
+    "orchestrator": { ... },
+    "worker-fast": { ... },
+    "worker-fast-2": { ... },
+    // ... copy all agent definitions from the plugin's opencode.json
+  }
+}
+```
 
-2. **Configure providers** (add API keys):
-   ```bash
-   cd /your/project
-   opencode
-   /connect  # Select each provider and add keys
-   ```
+### Step 3: Configure providers
 
-3. **Verify models:**
-   ```bash
-   opencode models
-   ```
+Add API keys for the models you want to use:
 
-4. **Adjust model IDs** if needed in `opencode.json` and `.opencode/agents/*.md`
+```bash
+cd /your/project
+opencode
+/connect  # Select each provider and add keys
+```
+
+### Step 4: Verify setup
+
+```bash
+opencode agents  # Should show orchestrator, worker-fast, worker-main, etc.
+opencode models  # Verify your providers are configured
+```
+
+### Why two steps?
+
+OpenCode plugins can provide tools and hooks, but agent definitions must be in your project's config. This gives you control over which workers to enable and which models to use.
 
 ## Usage
 
